@@ -1,0 +1,17 @@
+site_name: Fenil Patel Portfolio
+nav:
+  - Home: index.md
+  - Data Science:
+      - Retail Profit Optimization: ds/retail-profit.md
+  - Data Analytics:
+      - Sales Dashboard: da/sales-dashboard.md
+  - Data Engineering:
+      - Data Pipeline: de/data-pipeline.md
+theme:
+  name: material
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.sections
+    - toc.integrate
+    - content.code.annotate
