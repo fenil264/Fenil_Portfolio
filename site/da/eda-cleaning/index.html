@@ -1,0 +1,1716 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://fenil264.github.io/Fenil_Portfolio/da/eda-cleaning/">
+      
+      
+        <link rel="prev" href="../sales-dashboard/">
+      
+      
+        <link rel="next" href="../../de/data-pipeline/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>EDA and Data Cleaning - Fenil Patel Portfolio</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.342714a4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../styles/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#step-1-importing-data" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Fenil Patel Portfolio" class="md-header__button md-logo" aria-label="Fenil Patel Portfolio" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Fenil Patel Portfolio
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              EDA and Data Cleaning
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/fenil264/Fenil_Portfolio" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    fenil264/Fenil_Portfolio
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Fenil Patel Portfolio" class="md-nav__button md-logo" aria-label="Fenil Patel Portfolio" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Fenil Patel Portfolio
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/fenil264/Fenil_Portfolio" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    fenil264/Fenil_Portfolio
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Data Science
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Data Science
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ds/retail-profit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Retail Profit Optimization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Data Analytics
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Data Analytics
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sales-dashboard/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Sales Dashboard
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    EDA and Data Cleaning
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    EDA and Data Cleaning
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#dataset-description" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dataset Description
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Data Engineering
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Data Engineering
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../de/data-pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Data Pipeline
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#dataset-description" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dataset Description
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="step-1-importing-data">Step 1: Importing data<a class="headerlink" href="#step-1-importing-data" title="Permanent link">&para;</a></h1>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+
+<span class="c1"># Show all columns when displaying dataframes</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;display.max_columns&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+
+<span class="c1"># Load the raw dataset</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;Superstore.csv&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;latin1&#39;</span><span class="p">)</span>
+
+
+<span class="c1"># Preview the first few rows</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</code></pre></div>
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Row ID</th>
+      <th>Order ID</th>
+      <th>Order Date</th>
+      <th>Ship Date</th>
+      <th>Ship Mode</th>
+      <th>Customer ID</th>
+      <th>Customer Name</th>
+      <th>Segment</th>
+      <th>Country</th>
+      <th>City</th>
+      <th>State</th>
+      <th>Postal Code</th>
+      <th>Region</th>
+      <th>Product ID</th>
+      <th>Category</th>
+      <th>Sub-Category</th>
+      <th>Product Name</th>
+      <th>Sales</th>
+      <th>Quantity</th>
+      <th>Discount</th>
+      <th>Profit</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>CA-2016-152156</td>
+      <td>11/8/2016</td>
+      <td>11/11/2016</td>
+      <td>Second Class</td>
+      <td>CG-12520</td>
+      <td>Claire Gute</td>
+      <td>Consumer</td>
+      <td>United States</td>
+      <td>Henderson</td>
+      <td>Kentucky</td>
+      <td>42420</td>
+      <td>South</td>
+      <td>FUR-BO-10001798</td>
+      <td>Furniture</td>
+      <td>Bookcases</td>
+      <td>Bush Somerset Collection Bookcase</td>
+      <td>261.9600</td>
+      <td>2</td>
+      <td>0.00</td>
+      <td>41.9136</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>CA-2016-152156</td>
+      <td>11/8/2016</td>
+      <td>11/11/2016</td>
+      <td>Second Class</td>
+      <td>CG-12520</td>
+      <td>Claire Gute</td>
+      <td>Consumer</td>
+      <td>United States</td>
+      <td>Henderson</td>
+      <td>Kentucky</td>
+      <td>42420</td>
+      <td>South</td>
+      <td>FUR-CH-10000454</td>
+      <td>Furniture</td>
+      <td>Chairs</td>
+      <td>Hon Deluxe Fabric Upholstered Stacking Chairs,...</td>
+      <td>731.9400</td>
+      <td>3</td>
+      <td>0.00</td>
+      <td>219.5820</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>CA-2016-138688</td>
+      <td>6/12/2016</td>
+      <td>6/16/2016</td>
+      <td>Second Class</td>
+      <td>DV-13045</td>
+      <td>Darrin Van Huff</td>
+      <td>Corporate</td>
+      <td>United States</td>
+      <td>Los Angeles</td>
+      <td>California</td>
+      <td>90036</td>
+      <td>West</td>
+      <td>OFF-LA-10000240</td>
+      <td>Office Supplies</td>
+      <td>Labels</td>
+      <td>Self-Adhesive Address Labels for Typewriters b...</td>
+      <td>14.6200</td>
+      <td>2</td>
+      <td>0.00</td>
+      <td>6.8714</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>US-2015-108966</td>
+      <td>10/11/2015</td>
+      <td>10/18/2015</td>
+      <td>Standard Class</td>
+      <td>SO-20335</td>
+      <td>Sean O'Donnell</td>
+      <td>Consumer</td>
+      <td>United States</td>
+      <td>Fort Lauderdale</td>
+      <td>Florida</td>
+      <td>33311</td>
+      <td>South</td>
+      <td>FUR-TA-10000577</td>
+      <td>Furniture</td>
+      <td>Tables</td>
+      <td>Bretford CR4500 Series Slim Rectangular Table</td>
+      <td>957.5775</td>
+      <td>5</td>
+      <td>0.45</td>
+      <td>-383.0310</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>US-2015-108966</td>
+      <td>10/11/2015</td>
+      <td>10/18/2015</td>
+      <td>Standard Class</td>
+      <td>SO-20335</td>
+      <td>Sean O'Donnell</td>
+      <td>Consumer</td>
+      <td>United States</td>
+      <td>Fort Lauderdale</td>
+      <td>Florida</td>
+      <td>33311</td>
+      <td>South</td>
+      <td>OFF-ST-10000760</td>
+      <td>Office Supplies</td>
+      <td>Storage</td>
+      <td>Eldon Fold 'N Roll Cart System</td>
+      <td>22.3680</td>
+      <td>2</td>
+      <td>0.20</td>
+      <td>2.5164</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h2 id="dataset-description">Dataset Description<a class="headerlink" href="#dataset-description" title="Permanent link">&para;</a></h2>
+<ul>
+<li>
+<p>The dataset represents sales transaction records from a retail company that sells consumer goods like office supplies, technology, and furniture across various regions in the United States. Each row captures the details of an individual item sold — including the order date, shipping date, product type, quantity, discount, and resulting profit. It also contains customer information, segment classification (Consumer, Corporate, or Home Office), and geographic attributes like city, state, and region.</p>
+</li>
+<li>
+<p>This data enables analysis of sales trends, profitability, customer behavior, discount impact, and supply chain efficiency.</p>
+</li>
+</ul>
+<h1 id="step-2-eda-and-data-cleaning">Step 2: EDA and Data Cleaning<a class="headerlink" href="#step-2-eda-and-data-cleaning" title="Permanent link">&para;</a></h1>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Shape of the dataset (rows x columns)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Dataset shape:&quot;</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+<span class="c1"># Overview of columns, data types, and non-null values</span>
+<span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</code></pre></div>
+
+<div class="codehilite"><pre><span></span><code><span class="nx">Dataset</span><span class="w"> </span><span class="nx">shape</span><span class="p">:</span><span class="w"> </span><span class="p">(</span><span class="mi">9994</span><span class="p">,</span><span class="w"> </span><span class="mi">21</span><span class="p">)</span>
+<span class="p">&lt;</span><span class="kd">class</span><span class="w"> </span><span class="err">&#39;</span><span class="nx">pandas</span><span class="p">.</span><span class="nx">core</span><span class="p">.</span><span class="nx">frame</span><span class="p">.</span><span class="nx">DataFrame</span><span class="err">&#39;</span><span class="p">&gt;</span>
+<span class="nx">RangeIndex</span><span class="p">:</span><span class="w"> </span><span class="mi">9994</span><span class="w"> </span><span class="nx">entries</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="mi">9993</span>
+<span class="nx">Data</span><span class="w"> </span><span class="nx">columns</span><span class="w"> </span><span class="p">(</span><span class="nx">total</span><span class="w"> </span><span class="mi">21</span><span class="w"> </span><span class="nx">columns</span><span class="p">):</span>
+<span class="w"> </span><span class="err">#</span><span class="w">   </span><span class="nx">Column</span><span class="w">         </span><span class="nx">Non</span><span class="o">-</span><span class="nx">Null</span><span class="w"> </span><span class="nx">Count</span><span class="w">  </span><span class="nx">Dtype</span><span class="w">  </span>
+<span class="o">---</span><span class="w">  </span><span class="o">------</span><span class="w">         </span><span class="o">--------------</span><span class="w">  </span><span class="o">-----</span><span class="w">  </span>
+<span class="w"> </span><span class="mi">0</span><span class="w">   </span><span class="nx">Row</span><span class="w"> </span><span class="nx">ID</span><span class="w">         </span><span class="mi">9994</span><span class="w"> </span><span class="nx">non</span><span class="o">-</span><span class="nx">null</span><span class="w">   </span><span class="nx">int64</span><span class="w">  </span>
+<span class="w"> </span><span class="mi">1</span><span class="w">   </span><span class="nx">Order</span><span class="w"> </span><span class="nx">ID</span><span class="w">       </span><span class="mi">9994</span><span class="w"> </span><span class="nx">non</span><span class="o">-</span><span class="nx">null</span><span class="w">   </span><span class="nx">object</span><span class="w"> </span>
+<span class="w"> </span><span class="mi">2</span><span class="w">   </span><span class="nx">Order</span><span class="w"> </span><span class="nx">Date</span><span class="w">     </span><span class="mi">9994</span><span class="w"> </span><span class="nx">non</span><span class="o">-</span><span class="nx">null</span><span class="w">   </span><span class="nx">object</span><span class="w"> </span>
+<span class="w"> </span><span class="mi">3</span><span class="w">   </span><span class="nx">Ship</span><span class="w"> </span><span class="nx">Date</span><span class="w">      </span><span class="mi">9994</span><span class="w"> </span><span class="nx">non</span><span class="o">-</span><span class="nx">null</span><span class="w">   </span><span class="nx">object</span><span class="w"> </span>
+<span class="w"> </span><span class="mi">4</span><span class="w">   </span><span class="nx">Ship</span><span class="w"> </span><span class="nx">Mode</span><span class="w">      </span><span class="mi">9994</span><span class="w"> </span><span class="nx">non</span><span class="o">-</span><span class="nx">null</span><span class="w">   </span><span class="nx">object</span><span class="w"> </span>
+<span class="w"> </span><span class="mi">5</span><span class="w">   </span><span class="nx">Customer</span><span class="w"> </span><span class="nx">ID</span><span class="w">    </span><span class="mi">9994</span><span class="w"> </span><span class="nx">non</span><span class="o">-</span><span class="nx">null</span><span class="w">   </span><span class="nx">object</span><span class="w"> </span>
+<span class="w"> </span><span class="mi">6</span><span class="w">   </span><span class="nx">Customer</span><span class="w"> </span><span class="nx">Name</span><span class="w">  </span><span class="mi">9994</span><span class="w"> </span><span class="nx">non</span><span class="o">-</span><span class="nx">null</span><span class="w">   </span><span class="nx">object</span><span class="w"> </span>
+<span class="w"> </span><span class="mi">7</span><span class="w">   </span><span class="nx">Segment</span><span class="w">        </span><span class="mi">9994</span><span class="w"> </span><span class="nx">non</span><span class="o">-</span><span class="nx">null</span><span class="w">   </span><span class="nx">object</span><span class="w"> </span>
+<span class="w"> </span><span class="mi">8</span><span class="w">   </span><span class="nx">Country</span><span class="w">        </span><span class="mi">9994</span><span class="w"> </span><span class="nx">non</span><span class="o">-</span><span class="nx">null</span><span class="w">   </span><span class="nx">object</span><span class="w"> </span>
+<span class="w"> </span><span class="mi">9</span><span class="w">   </span><span class="nx">City</span><span class="w">           </span><span class="mi">9994</span><span class="w"> </span><span class="nx">non</span><span class="o">-</span><span class="nx">null</span><span class="w">   </span><span class="nx">object</span><span class="w"> </span>
+<span class="w"> </span><span class="mi">10</span><span class="w">  </span><span class="nx">State</span><span class="w">          </span><span class="mi">9994</span><span class="w"> </span><span class="nx">non</span><span class="o">-</span><span class="nx">null</span><span class="w">   </span><span class="nx">object</span><span class="w"> </span>
+<span class="w"> </span><span class="mi">11</span><span class="w">  </span><span class="nx">Postal</span><span class="w"> </span><span class="nx">Code</span><span class="w">    </span><span class="mi">9994</span><span class="w"> </span><span class="nx">non</span><span class="o">-</span><span class="nx">null</span><span class="w">   </span><span class="nx">int64</span><span class="w">  </span>
+<span class="w"> </span><span class="mi">12</span><span class="w">  </span><span class="nx">Region</span><span class="w">         </span><span class="mi">9994</span><span class="w"> </span><span class="nx">non</span><span class="o">-</span><span class="nx">null</span><span class="w">   </span><span class="nx">object</span><span class="w"> </span>
+<span class="w"> </span><span class="mi">13</span><span class="w">  </span><span class="nx">Product</span><span class="w"> </span><span class="nx">ID</span><span class="w">     </span><span class="mi">9994</span><span class="w"> </span><span class="nx">non</span><span class="o">-</span><span class="nx">null</span><span class="w">   </span><span class="nx">object</span><span class="w"> </span>
+<span class="w"> </span><span class="mi">14</span><span class="w">  </span><span class="nx">Category</span><span class="w">       </span><span class="mi">9994</span><span class="w"> </span><span class="nx">non</span><span class="o">-</span><span class="nx">null</span><span class="w">   </span><span class="nx">object</span><span class="w"> </span>
+<span class="w"> </span><span class="mi">15</span><span class="w">  </span><span class="nx">Sub</span><span class="o">-</span><span class="nx">Category</span><span class="w">   </span><span class="mi">9994</span><span class="w"> </span><span class="nx">non</span><span class="o">-</span><span class="nx">null</span><span class="w">   </span><span class="nx">object</span><span class="w"> </span>
+<span class="w"> </span><span class="mi">16</span><span class="w">  </span><span class="nx">Product</span><span class="w"> </span><span class="nx">Name</span><span class="w">   </span><span class="mi">9994</span><span class="w"> </span><span class="nx">non</span><span class="o">-</span><span class="nx">null</span><span class="w">   </span><span class="nx">object</span><span class="w"> </span>
+<span class="w"> </span><span class="mi">17</span><span class="w">  </span><span class="nx">Sales</span><span class="w">          </span><span class="mi">9994</span><span class="w"> </span><span class="nx">non</span><span class="o">-</span><span class="nx">null</span><span class="w">   </span><span class="nx">float64</span>
+<span class="w"> </span><span class="mi">18</span><span class="w">  </span><span class="nx">Quantity</span><span class="w">       </span><span class="mi">9994</span><span class="w"> </span><span class="nx">non</span><span class="o">-</span><span class="nx">null</span><span class="w">   </span><span class="nx">int64</span><span class="w">  </span>
+<span class="w"> </span><span class="mi">19</span><span class="w">  </span><span class="nx">Discount</span><span class="w">       </span><span class="mi">9994</span><span class="w"> </span><span class="nx">non</span><span class="o">-</span><span class="nx">null</span><span class="w">   </span><span class="nx">float64</span>
+<span class="w"> </span><span class="mi">20</span><span class="w">  </span><span class="nx">Profit</span><span class="w">         </span><span class="mi">9994</span><span class="w"> </span><span class="nx">non</span><span class="o">-</span><span class="nx">null</span><span class="w">   </span><span class="nx">float64</span>
+<span class="nx">dtypes</span><span class="p">:</span><span class="w"> </span><span class="nx">float64</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span><span class="w"> </span><span class="nx">int64</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span><span class="w"> </span><span class="nx">object</span><span class="p">(</span><span class="mi">15</span><span class="p">)</span>
+<span class="nx">memory</span><span class="w"> </span><span class="nx">usage</span><span class="p">:</span><span class="w"> </span><span class="m m-Double">1.6</span><span class="o">+</span><span class="w"> </span><span class="nx">MB</span>
+</code></pre></div>
+
+<div class="codehilite"><pre><span></span><code><span class="c1"># Count duplicate rows</span>
+<span class="n">duplicate_rows</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">duplicated</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Total duplicate rows: </span><span class="si">{</span><span class="n">duplicate_rows</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<div class="codehilite"><pre><span></span><code>Total duplicate rows: 0
+</code></pre></div>
+
+<div class="codehilite"><pre><span></span><code><span class="c1"># Summary stats for numeric columns</span>
+<span class="n">df</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</code></pre></div>
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Row ID</th>
+      <th>Postal Code</th>
+      <th>Sales</th>
+      <th>Quantity</th>
+      <th>Discount</th>
+      <th>Profit</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>9994.000000</td>
+      <td>9994.000000</td>
+      <td>9994.000000</td>
+      <td>9994.000000</td>
+      <td>9994.000000</td>
+      <td>9994.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>4997.500000</td>
+      <td>55190.379428</td>
+      <td>229.858001</td>
+      <td>3.789574</td>
+      <td>0.156203</td>
+      <td>28.656896</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>2885.163629</td>
+      <td>32063.693350</td>
+      <td>623.245101</td>
+      <td>2.225110</td>
+      <td>0.206452</td>
+      <td>234.260108</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>1.000000</td>
+      <td>1040.000000</td>
+      <td>0.444000</td>
+      <td>1.000000</td>
+      <td>0.000000</td>
+      <td>-6599.978000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>2499.250000</td>
+      <td>23223.000000</td>
+      <td>17.280000</td>
+      <td>2.000000</td>
+      <td>0.000000</td>
+      <td>1.728750</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>4997.500000</td>
+      <td>56430.500000</td>
+      <td>54.490000</td>
+      <td>3.000000</td>
+      <td>0.200000</td>
+      <td>8.666500</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>7495.750000</td>
+      <td>90008.000000</td>
+      <td>209.940000</td>
+      <td>5.000000</td>
+      <td>0.200000</td>
+      <td>29.364000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>9994.000000</td>
+      <td>99301.000000</td>
+      <td>22638.480000</td>
+      <td>14.000000</td>
+      <td>0.800000</td>
+      <td>8399.976000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="codehilite"><pre><span></span><code><span class="c1"># Check column data types</span>
+<span class="n">df</span><span class="o">.</span><span class="n">dtypes</span>
+</code></pre></div>
+
+<div class="codehilite"><pre><span></span><code><span class="nx">Row</span><span class="w"> </span><span class="nx">ID</span><span class="w">             </span><span class="nx">int64</span>
+<span class="nx">Order</span><span class="w"> </span><span class="nx">ID</span><span class="w">          </span><span class="nx">object</span>
+<span class="nx">Order</span><span class="w"> </span><span class="nx">Date</span><span class="w">        </span><span class="nx">object</span>
+<span class="nx">Ship</span><span class="w"> </span><span class="nx">Date</span><span class="w">         </span><span class="nx">object</span>
+<span class="nx">Ship</span><span class="w"> </span><span class="nx">Mode</span><span class="w">         </span><span class="nx">object</span>
+<span class="nx">Customer</span><span class="w"> </span><span class="nx">ID</span><span class="w">       </span><span class="nx">object</span>
+<span class="nx">Customer</span><span class="w"> </span><span class="nx">Name</span><span class="w">     </span><span class="nx">object</span>
+<span class="nx">Segment</span><span class="w">           </span><span class="nx">object</span>
+<span class="nx">Country</span><span class="w">           </span><span class="nx">object</span>
+<span class="nx">City</span><span class="w">              </span><span class="nx">object</span>
+<span class="nx">State</span><span class="w">             </span><span class="nx">object</span>
+<span class="nx">Postal</span><span class="w"> </span><span class="nx">Code</span><span class="w">        </span><span class="nx">int64</span>
+<span class="nx">Region</span><span class="w">            </span><span class="nx">object</span>
+<span class="nx">Product</span><span class="w"> </span><span class="nx">ID</span><span class="w">        </span><span class="nx">object</span>
+<span class="nx">Category</span><span class="w">          </span><span class="nx">object</span>
+<span class="nx">Sub</span><span class="o">-</span><span class="nx">Category</span><span class="w">      </span><span class="nx">object</span>
+<span class="nx">Product</span><span class="w"> </span><span class="nx">Name</span><span class="w">      </span><span class="nx">object</span>
+<span class="nx">Sales</span><span class="w">            </span><span class="nx">float64</span>
+<span class="nx">Quantity</span><span class="w">           </span><span class="nx">int64</span>
+<span class="nx">Discount</span><span class="w">         </span><span class="nx">float64</span>
+<span class="nx">Profit</span><span class="w">           </span><span class="nx">float64</span>
+<span class="nx">dtype</span><span class="p">:</span><span class="w"> </span><span class="nx">object</span>
+</code></pre></div>
+
+<div class="codehilite"><pre><span></span><code><span class="c1"># Dates are in object so converting them into dates</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;Order Date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Order Date&#39;</span><span class="p">],</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;%m/</span><span class="si">%d</span><span class="s1">/%Y&#39;</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;Ship Date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Ship Date&#39;</span><span class="p">],</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;%m/</span><span class="si">%d</span><span class="s1">/%Y&#39;</span><span class="p">)</span>
+<span class="c1"># Converting Postal Code as string</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;Postal Code&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Postal Code&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+
+<span class="c1"># Drop duplicates</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">()</span>
+
+<span class="c1"># Check numeric column distributions</span>
+<span class="n">numeric_cols</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Sales&#39;</span><span class="p">,</span> <span class="s1">&#39;Profit&#39;</span><span class="p">,</span> <span class="s1">&#39;Quantity&#39;</span><span class="p">,</span> <span class="s1">&#39;Discount&#39;</span><span class="p">]</span>
+<span class="n">df</span><span class="p">[</span><span class="n">numeric_cols</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">bins</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;skyblue&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">&quot;Distribution of Numeric Variables&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+
+<p><img alt="png" src="output_8_0.png" /></p>
+<h2 id="interpreting-distributions">Interpreting distributions<a class="headerlink" href="#interpreting-distributions" title="Permanent link">&para;</a></h2>
+<ol>
+<li>
+<p>From the above distribution plots it is visible that <strong>sales are exteremly right skewed</strong>, and it shows most of orders are under 1000$ but few are huge that might be from B2B or High Consumer retail. So we might have to Log-transform sales when modeling or use percentiles (to avoid models overfitting to extreme sales).</p>
+</li>
+<li>
+<p>Profit: It's centered around 0 with sharp peak, but long tails on both sides (including negative profits). This is a red flag. High sales should ideally bring in profit but this points to profit leakage.</p>
+</li>
+<li>
+<p>Quantity: quanitity plot is positive skewed. it's visible that huge orders are rare. This might be you're making more sales in retail instead of wholesale.</p>
+</li>
+<li>
+<p>Discounts: sharp spikes at 0 and .2 which might be low discounts more profit but as the discounts are increasing company is bleeding their profits.</p>
+</li>
+</ol>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Select numeric columns only</span>
+<span class="n">numeric_cols</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Sales&#39;</span><span class="p">,</span> <span class="s1">&#39;Profit&#39;</span><span class="p">,</span> <span class="s1">&#39;Quantity&#39;</span><span class="p">,</span> <span class="s1">&#39;Discount&#39;</span><span class="p">]</span>
+
+<span class="c1"># Compute correlation matrix</span>
+<span class="n">corr_matrix</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">numeric_cols</span><span class="p">]</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
+
+<span class="c1"># Plot heatmap</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">corr_matrix</span><span class="p">,</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s2">&quot;.2f&quot;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;coolwarm&quot;</span><span class="p">,</span> <span class="n">linewidths</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Correlation Matrix of Numeric Variables&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+
+<p><img alt="png" src="output_10_0.png" /></p>
+<p>The correlation heatmap revealed several important relationships. Sales and profit showed a moderate positive correlation (0.48), indicating that higher sales can lead to higher profits, though not always. More importantly, there was a weak negative correlation (–0.22) between discount and profit, suggesting that increasing discounts tends to reduce profitability. Other variable pairs showed negligible correlation, meaning no strong direct linear relationships exist among them. This pattern directly points to a potential issue in the business strategy — discounts may not be delivering the intended profitability boost, which sets the stage for hypothesis testing.</p>
+<div class="codehilite"><pre><span></span><code><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;Discount&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Profit&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Discount vs. Profit&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Discount&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Profit&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+
+<p><img alt="png" src="output_12_0.png" /></p>
+<p>Further exploration using a scatter plot of discount vs. profit confirmed this suspicion. At 0% discount, the spread of profit values was wide, including several highly profitable transactions. However, at discount levels between 0.2 and 0.8, profits consistently declined, and many entries dropped into deep negative territory. This suggests that excessive discounting may not only fail to incentivize profitable behavior but could actively harm margins. This pattern is a compelling foundation for a focused <strong>“Discount Abuse Pattern”</strong> analysis.</p>
+<div class="codehilite"><pre><span></span><code><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;Sales&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Profit&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Sales vs. Profit&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Sales&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Profit&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+
+<p><img alt="png" src="output_14_0.png" /></p>
+<p>A separate scatter plot of sales vs. profit revealed a triangular distribution. Most transactions clustered in the low-sale, low-profit range, while some high-sale entries still ended in loss, highlighting that strong revenue does not automatically translate into strong profit. This supports the concept of profit leakage, where certain high-revenue items or regions might be underperforming in terms of actual financial return.</p>
+<div class="codehilite"><pre><span></span><code><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;Segment&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Profit&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Profit Distribution by Customer Segment&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+
+<p><img alt="png" src="output_16_0.png" /></p>
+<p>Boxplot of profit distribution by customer segment (Consumer, Corporate, and Home Office) showed similar median profits across all segments. However, each segment had numerous extreme outliers on both ends of the profit scale, including significant losses. This indicates that no segment is immune to unprofitable transactions, and high-risk behavior is spread across the board. It further implies that broad segmentation is not sufficient — deeper analysis at the intersection of region, product category, and discount level will likely yield more actionable insights.</p>
+<h1 id="step-3-defining-hypothesis">Step 3: Defining hypothesis<a class="headerlink" href="#step-3-defining-hypothesis" title="Permanent link">&para;</a></h1>
+<p>Based on the patterns identified during exploratory data analysis, we formulated several business-focused hypotheses aimed at uncovering inefficiencies and hidden risks in the company's retail strategy. The first hypothesis addresses profit leakage, suggesting that certain product sub-categories or geographic regions may generate high sales yet consistently yield low or even negative profit. This would indicate operational inefficiencies or poor pricing structures that mask underlying losses.</p>
+<p>The second hypothesis revolves around a discount abuse pattern, based on the observation that higher discounts, especially those exceeding 30%, often correspond to sharp declines in profitability. This raises the possibility that discounting, instead of boosting volume or customer retention, is eroding margins without generating meaningful returns — a critical area for revenue protection.</p>
+<p>The third hypothesis focuses on inventory optimization. By analyzing order quantities and shipping delays across product categories, we suspect that certain items are more prone to late fulfillment or stockouts. This inefficiency may lead to lost sales or poor customer experience, and highlights the need for more strategic restocking cycles.</p>
+<p>Lastly, the time-to-profit hypothesis investigates how long it takes for a customer to become profitable. By analyzing the cumulative profit timeline per customer, we aim to identify segments or regions that require longer lead time to break even. This insight can inform smarter investments in marketing, onboarding, and retention strategies by focusing on faster-returning customer groups.</p>
+<h2 id="hypothesis-1-profit-leakage">Hypothesis 1: Profit Leakage<a class="headerlink" href="#hypothesis-1-profit-leakage" title="Permanent link">&para;</a></h2>
+<p><strong>“Some product sub-categories or regions generate high sales but consistently result in low or negative profit, indicating potential leakage.”</strong></p>
+<h3 id="11-create-a-new-feature-profit-margin">1.1) Create a new feature: Profit Margin<a class="headerlink" href="#11-create-a-new-feature-profit-margin" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Profit margin = profit as a percentage of sales</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;Profit Margin&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Profit&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Sales&#39;</span><span class="p">]</span>
+</code></pre></div>
+
+<h3 id="12-group-data-by-category-sub-category-and-region">1.2) Group data by Category, Sub-Category, and Region<a class="headerlink" href="#12-group-data-by-category-sub-category-and-region" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Group by Category, Sub-Category, and Region</span>
+<span class="n">grouped</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;Category&#39;</span><span class="p">,</span> <span class="s1">&#39;Sub-Category&#39;</span><span class="p">,</span> <span class="s1">&#39;Region&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span>
+    <span class="s1">&#39;Sales&#39;</span><span class="p">:</span> <span class="s1">&#39;sum&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Profit&#39;</span><span class="p">:</span> <span class="s1">&#39;sum&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Profit Margin&#39;</span><span class="p">:</span> <span class="s1">&#39;mean&#39;</span>
+<span class="p">})</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+</code></pre></div>
+
+<h3 id="13-sort-to-spot-problem-areas-low-or-negative-profit-with-high-sales">1.3) Sort to spot problem areas (low or negative profit with high sales)<a class="headerlink" href="#13-sort-to-spot-problem-areas-low-or-negative-profit-with-high-sales" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Sort by Sales and Profit to catch high-volume low-profit areas</span>
+<span class="n">grouped_sorted</span> <span class="o">=</span> <span class="n">grouped</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Sales&#39;</span><span class="p">,</span> <span class="s1">&#39;Profit&#39;</span><span class="p">],</span> <span class="n">ascending</span><span class="o">=</span><span class="p">[</span><span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">])</span>
+</code></pre></div>
+
+<div class="codehilite"><pre><span></span><code><span class="c1"># Show the top 15 potential profit leakage zones</span>
+<span class="n">grouped_sorted</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">15</span><span class="p">)</span>
+</code></pre></div>
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Category</th>
+      <th>Sub-Category</th>
+      <th>Region</th>
+      <th>Sales</th>
+      <th>Profit</th>
+      <th>Profit Margin</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>7</th>
+      <td>Furniture</td>
+      <td>Chairs</td>
+      <td>West</td>
+      <td>101781.328</td>
+      <td>4027.5843</td>
+      <td>0.021498</td>
+    </tr>
+    <tr>
+      <th>65</th>
+      <td>Technology</td>
+      <td>Phones</td>
+      <td>East</td>
+      <td>100614.982</td>
+      <td>12314.6860</td>
+      <td>0.089939</td>
+    </tr>
+    <tr>
+      <th>67</th>
+      <td>Technology</td>
+      <td>Phones</td>
+      <td>West</td>
+      <td>98684.352</td>
+      <td>9110.7426</td>
+      <td>0.085740</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Furniture</td>
+      <td>Chairs</td>
+      <td>East</td>
+      <td>96260.683</td>
+      <td>9357.7706</td>
+      <td>0.063061</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Furniture</td>
+      <td>Chairs</td>
+      <td>Central</td>
+      <td>85230.646</td>
+      <td>6592.7221</td>
+      <td>0.004443</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>Furniture</td>
+      <td>Tables</td>
+      <td>West</td>
+      <td>84754.562</td>
+      <td>1482.6073</td>
+      <td>-0.053966</td>
+    </tr>
+    <tr>
+      <th>64</th>
+      <td>Technology</td>
+      <td>Phones</td>
+      <td>Central</td>
+      <td>72403.282</td>
+      <td>12323.0267</td>
+      <td>0.166875</td>
+    </tr>
+    <tr>
+      <th>45</th>
+      <td>Office Supplies</td>
+      <td>Storage</td>
+      <td>East</td>
+      <td>71612.584</td>
+      <td>8389.3712</td>
+      <td>0.096746</td>
+    </tr>
+    <tr>
+      <th>47</th>
+      <td>Office Supplies</td>
+      <td>Storage</td>
+      <td>West</td>
+      <td>70532.852</td>
+      <td>8645.3222</td>
+      <td>0.132321</td>
+    </tr>
+    <tr>
+      <th>61</th>
+      <td>Technology</td>
+      <td>Machines</td>
+      <td>East</td>
+      <td>66106.165</td>
+      <td>6928.6429</td>
+      <td>-0.176847</td>
+    </tr>
+    <tr>
+      <th>55</th>
+      <td>Technology</td>
+      <td>Accessories</td>
+      <td>West</td>
+      <td>61114.116</td>
+      <td>16484.5983</td>
+      <td>0.241386</td>
+    </tr>
+    <tr>
+      <th>66</th>
+      <td>Technology</td>
+      <td>Phones</td>
+      <td>South</td>
+      <td>58304.438</td>
+      <td>10767.2753</td>
+      <td>0.174286</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>Office Supplies</td>
+      <td>Binders</td>
+      <td>Central</td>
+      <td>56923.282</td>
+      <td>-1043.6369</td>
+      <td>-0.859399</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>Office Supplies</td>
+      <td>Binders</td>
+      <td>West</td>
+      <td>55961.113</td>
+      <td>16096.8016</td>
+      <td>0.166587</td>
+    </tr>
+    <tr>
+      <th>62</th>
+      <td>Technology</td>
+      <td>Machines</td>
+      <td>South</td>
+      <td>53890.960</td>
+      <td>-1438.8930</td>
+      <td>0.012778</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h3 id="14-visualize-profit-margin-by-sub-category">1.4) Visualize profit margin by sub-category<a class="headerlink" href="#14-visualize-profit-margin-by-sub-category" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">grouped</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;Profit Margin&#39;</span><span class="p">),</span> 
+            <span class="n">x</span><span class="o">=</span><span class="s1">&#39;Sub-Category&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Profit Margin&#39;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s1">&#39;Region&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Average Profit Margin by Sub-Category and Region&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+
+<p><img alt="png" src="output_29_0.png" /></p>
+<p>The chart shows how much profit each product sub-category makes on average, across different regions. What stands out clearly is that some products — like Appliances, Binders, Furnishings, Tables, and Bookcases — are consistently unprofitable in certain areas, especially in the Central region. For example, Appliances in Central have a very low margin, meaning the company is likely losing money on every sale there.</p>
+<p>On the flip side, sub-categories like Labels, Paper, and Envelopes perform well across all regions, showing strong and steady profits. These are likely the products that help keep the business healthy.</p>
+<p>What this tells us is simple: even if some items are selling well, they’re not always making money. This is called profit leakage — and it's a hidden problem that businesses often miss. It’s worth looking deeper into pricing, discounting, or shipping costs for those underperforming products in those regions.</p>
+<h4 id="we-already-know-sub-categories-like-appliances-binders-furnishings-tables-are-leaking-profitbut-now-we-will-filter-the-products-which-are-loss-making-or-affecting-profits">We already know sub-categories like Appliances, Binders, Furnishings, Tables are leaking profit.But now we will filter the products which are loss making or affecting profits.<a class="headerlink" href="#we-already-know-sub-categories-like-appliances-binders-furnishings-tables-are-leaking-profitbut-now-we-will-filter-the-products-which-are-loss-making-or-affecting-profits" title="Permanent link">&para;</a></h4>
+<h3 id="15-filter-only-those-sub-categories">1.5) Filter only those sub-categories<a class="headerlink" href="#15-filter-only-those-sub-categories" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Focus on sub-categories where margin is suspicious</span>
+<span class="n">leaking_subs</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Appliances&#39;</span><span class="p">,</span> <span class="s1">&#39;Binders&#39;</span><span class="p">,</span> <span class="s1">&#39;Furnishings&#39;</span><span class="p">,</span> <span class="s1">&#39;Tables&#39;</span><span class="p">,</span> <span class="s1">&#39;Bookcases&#39;</span><span class="p">]</span>
+<span class="n">df_leak</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Sub-Category&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">leaking_subs</span><span class="p">)]</span>
+</code></pre></div>
+
+<h3 id="16-group-by-product-name-and-region">1.6) Group by Product Name and Region<a class="headerlink" href="#16-group-by-product-name-and-region" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Group by product and region to see detailed trends</span>
+<span class="n">leaky_products</span> <span class="o">=</span> <span class="n">df_leak</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;Product Name&#39;</span><span class="p">,</span> <span class="s1">&#39;Region&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span>
+    <span class="s1">&#39;Sales&#39;</span><span class="p">:</span> <span class="s1">&#39;sum&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Profit&#39;</span><span class="p">:</span> <span class="s1">&#39;sum&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Profit Margin&#39;</span><span class="p">:</span> <span class="s1">&#39;mean&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Quantity&#39;</span><span class="p">:</span> <span class="s1">&#39;sum&#39;</span>
+<span class="p">})</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+</code></pre></div>
+
+<h3 id="17-filter-products-with-negative-or-low-margins">1.7)  Filter products with negative or low margins<a class="headerlink" href="#17-filter-products-with-negative-or-low-margins" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Filter to show only products with profit margin &lt; 0 (loss-making)</span>
+<span class="n">loss_products</span> <span class="o">=</span> <span class="n">leaky_products</span><span class="p">[</span><span class="n">leaky_products</span><span class="p">[</span><span class="s1">&#39;Profit Margin&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">]</span>
+
+<span class="c1"># Sort by most negative profit</span>
+<span class="n">loss_products</span> <span class="o">=</span> <span class="n">loss_products</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;Profit&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</code></pre></div>
+
+<div class="codehilite"><pre><span></span><code><span class="n">loss_products</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</code></pre></div>
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Product Name</th>
+      <th>Region</th>
+      <th>Sales</th>
+      <th>Profit</th>
+      <th>Profit Margin</th>
+      <th>Quantity</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>901</th>
+      <td>GBC DocuBind P400 Electric Binding System</td>
+      <td>Central</td>
+      <td>8710.336</td>
+      <td>-3048.6176</td>
+      <td>-0.980000</td>
+      <td>16</td>
+    </tr>
+    <tr>
+      <th>506</th>
+      <td>Chromcraft Bull-Nose Wood Oval Conference Tabl...</td>
+      <td>South</td>
+      <td>6611.760</td>
+      <td>-2865.0960</td>
+      <td>-0.433333</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>922</th>
+      <td>GBC Ibimaster 500 Manual ProClick Binding System</td>
+      <td>South</td>
+      <td>2967.822</td>
+      <td>-1978.5480</td>
+      <td>-0.666667</td>
+      <td>13</td>
+    </tr>
+    <tr>
+      <th>850</th>
+      <td>Fellowes PB500 Electric Punch Plastic Comb Bin...</td>
+      <td>Central</td>
+      <td>6100.752</td>
+      <td>-1525.1880</td>
+      <td>-0.833333</td>
+      <td>12</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>3.6 Cubic Foot Counter Height Office Refrigerator</td>
+      <td>Central</td>
+      <td>530.316</td>
+      <td>-1378.8216</td>
+      <td>-2.600000</td>
+      <td>9</td>
+    </tr>
+    <tr>
+      <th>903</th>
+      <td>GBC DocuBind P400 Electric Binding System</td>
+      <td>South</td>
+      <td>1633.188</td>
+      <td>-1306.5504</td>
+      <td>-0.800000</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>1221</th>
+      <td>Ibico Hi-Tech Manual Binding System</td>
+      <td>Central</td>
+      <td>1829.940</td>
+      <td>-1189.4610</td>
+      <td>-1.310000</td>
+      <td>18</td>
+    </tr>
+    <tr>
+      <th>1472</th>
+      <td>Riverside Furniture Oval Coffee Table, Oval En...</td>
+      <td>East</td>
+      <td>3958.530</td>
+      <td>-1187.5590</td>
+      <td>-0.300000</td>
+      <td>23</td>
+    </tr>
+    <tr>
+      <th>969</th>
+      <td>GBC ProClick 150 Presentation Binding System</td>
+      <td>Central</td>
+      <td>695.156</td>
+      <td>-1147.0074</td>
+      <td>-1.650000</td>
+      <td>11</td>
+    </tr>
+    <tr>
+      <th>412</th>
+      <td>Bush Advantage Collection Racetrack Conference...</td>
+      <td>South</td>
+      <td>2714.944</td>
+      <td>-1111.4302</td>
+      <td>-0.428788</td>
+      <td>11</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="codehilite"><pre><span></span><code><span class="n">pivot</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;Sub-Category&#39;</span><span class="p">,</span> <span class="s1">&#39;Region&#39;</span><span class="p">])[</span><span class="s1">&#39;Profit Margin&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">unstack</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">pivot</span><span class="p">,</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;RdYlGn&#39;</span><span class="p">,</span> <span class="n">center</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s2">&quot;.2f&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Average Profit Margin by Sub-Category and Region&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+
+<p><img alt="png" src="output_39_0.png" /></p>
+<p>The heatmap shows how profitable each product sub-category is across regions. Green means good margins, red means losses, and yellow is neutral.</p>
+<p>The most noticeable issue is Appliances in the Central region, with a highly <strong>negative margin of –1.25</strong>. Other loss-making areas include Binders and Furnishings, especially in Central and South.</p>
+<p>On the positive side, <strong>Labels, Paper, Envelopes, and Copiers perform well across all regions, showing consistently strong margins</strong>.</p>
+<p>Overall, this confirms that some products are dragging down profits, and specific regions need closer attention. It’s a clear signal of profit leakage, and a strong starting point for business decisions.</p>
+<h2 id="hypothesis-2-discount-abuse">Hypothesis 2: Discount Abuse<a class="headerlink" href="#hypothesis-2-discount-abuse" title="Permanent link">&para;</a></h2>
+<p><strong>“Giving higher discounts (especially above 30%) leads to lower or negative profit, meaning discounts may be hurting the business instead of helping.”</strong></p>
+<h3 id="21-bin-discount-into-ranges">2.1) Bin Discount into Ranges<a class="headerlink" href="#21-bin-discount-into-ranges" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Create discount buckets</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;Discount Bucket&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">cut</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Discount&#39;</span><span class="p">],</span>
+    <span class="n">bins</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mf">0.01</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+    <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;0%&#39;</span><span class="p">,</span> <span class="s1">&#39;0-10%&#39;</span><span class="p">,</span> <span class="s1">&#39;10-30%&#39;</span><span class="p">,</span> <span class="s1">&#39;30-50%&#39;</span><span class="p">,</span> <span class="s1">&#39;&gt;50%&#39;</span><span class="p">]</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<h3 id="22-calculate-average-profit-per-discount-bucket">2.2) Calculate Average Profit per Discount Bucket<a class="headerlink" href="#22-calculate-average-profit-per-discount-bucket" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Group by discount bucket</span>
+<span class="n">discount_analysis</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Discount Bucket&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span>
+    <span class="s1">&#39;Profit&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;mean&#39;</span><span class="p">,</span> <span class="s1">&#39;sum&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Sales&#39;</span><span class="p">:</span> <span class="s1">&#39;sum&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Quantity&#39;</span><span class="p">:</span> <span class="s1">&#39;sum&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Discount&#39;</span><span class="p">:</span> <span class="s1">&#39;count&#39;</span>
+<span class="p">})</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+
+<span class="c1"># Clean column names</span>
+<span class="n">discount_analysis</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Discount Bucket&#39;</span><span class="p">,</span> <span class="s1">&#39;Avg Profit&#39;</span><span class="p">,</span> <span class="s1">&#39;Total Profit&#39;</span><span class="p">,</span> <span class="s1">&#39;Total Sales&#39;</span><span class="p">,</span> <span class="s1">&#39;Total Quantity&#39;</span><span class="p">,</span> <span class="s1">&#39;Order Count&#39;</span><span class="p">]</span>
+<span class="n">discount_analysis</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;Discount Bucket&#39;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">discount_analysis</span>
+</code></pre></div>
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Discount Bucket</th>
+      <th>Avg Profit</th>
+      <th>Total Profit</th>
+      <th>Total Sales</th>
+      <th>Total Quantity</th>
+      <th>Order Count</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0%</td>
+      <td>66.900292</td>
+      <td>320987.6032</td>
+      <td>1.087908e+06</td>
+      <td>18267</td>
+      <td>4798</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0-10%</td>
+      <td>96.055074</td>
+      <td>9029.1770</td>
+      <td>5.436935e+04</td>
+      <td>373</td>
+      <td>94</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>10-30%</td>
+      <td>20.677597</td>
+      <td>81387.0201</td>
+      <td>8.953795e+05</td>
+      <td>14707</td>
+      <td>3936</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>30-50%</td>
+      <td>-156.282991</td>
+      <td>-48447.7273</td>
+      <td>1.953148e+05</td>
+      <td>1177</td>
+      <td>310</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>&gt;50%</td>
+      <td>-89.438144</td>
+      <td>-76559.0513</td>
+      <td>6.422874e+04</td>
+      <td>3349</td>
+      <td>856</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="codehilite"><pre><span></span><code><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">discount_analysis</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;Discount Bucket&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Avg Profit&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Profit Trend by Discount Level&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Average Profit per Order&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Discount Bucket&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+
+<p><img alt="png" src="output_46_0.png" /></p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Reshape data for stacked bar</span>
+<span class="n">discount_bar</span> <span class="o">=</span> <span class="n">discount_analysis</span><span class="p">[[</span><span class="s1">&#39;Discount Bucket&#39;</span><span class="p">,</span> <span class="s1">&#39;Total Sales&#39;</span><span class="p">,</span> <span class="s1">&#39;Total Profit&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;Discount Bucket&#39;</span><span class="p">)</span>
+
+<span class="c1"># Plot</span>
+<span class="n">discount_bar</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="n">stacked</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;skyblue&#39;</span><span class="p">,</span> <span class="s1">&#39;salmon&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Sales and Profit by Discount Bucket&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Amount ($)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Discount Bucket&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+
+<p><img alt="png" src="output_47_0.png" /></p>
+<p>The two charts clearly show that higher discounts don’t always lead to higher profits — in fact, they often lead to losses.</p>
+<p>In the line chart, we see that orders with no discount or very low discounts (0–10%) bring in the highest average profit. But as soon as the discount increases beyond 10%, profits start to fall — and beyond 30%, the average profit becomes negative, hitting the lowest point in the 30–50% range.</p>
+<p>The stacked bar chart makes it even clearer. While total sales still look high in the 10–30% discount group, the total profit from those orders is much smaller. For discounts above 30%, sales are still happening, but profits actually turn negative — which means the company is losing money even while generating revenue.</p>
+<h3 id="23-average-profit-by-region-and-discount-bucket">2.3) Average Profit by Region and Discount Bucket<a class="headerlink" href="#23-average-profit-by-region-and-discount-bucket" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="n">region_discount</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;Region&#39;</span><span class="p">,</span> <span class="s1">&#39;Discount Bucket&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span>
+    <span class="s1">&#39;Profit&#39;</span><span class="p">:</span> <span class="s1">&#39;mean&#39;</span>
+<span class="p">})</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+</code></pre></div>
+
+<div class="codehilite"><pre><span></span><code><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">region_discount</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;Discount Bucket&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Profit&#39;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s1">&#39;Region&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Average Profit by Discount Level and Region&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Average Profit&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+
+<p><img alt="png" src="output_51_0.png" /></p>
+<h3 id="24-average-profit-by-sub-category-and-discount-bucket">2.4) Average Profit by Sub-Category and Discount Bucket<a class="headerlink" href="#24-average-profit-by-sub-category-and-discount-bucket" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="n">sub_discount</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;Sub-Category&#39;</span><span class="p">,</span> <span class="s1">&#39;Discount Bucket&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span>
+    <span class="s1">&#39;Profit&#39;</span><span class="p">:</span> <span class="s1">&#39;mean&#39;</span>
+<span class="p">})</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+</code></pre></div>
+
+<div class="codehilite"><pre><span></span><code><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">sub_discount</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;Discount Bucket&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Profit&#39;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s1">&#39;Sub-Category&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Average Profit by Discount Level and Sub-Category&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Average Profit&quot;</span><span class="p">)</span>
+<span class="mi">8</span><span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+
+<p><img alt="png" src="output_54_0.png" /></p>
+<p>The region-wise breakdown shows that profit drops sharply across all regions once the discount crosses 30%. The South region is hit the hardest, with the average profit falling below –$400 per order in the 30–50% discount range. Central and West regions also show strong negative profit trends at higher discount levels. Even at &gt;50% discounts, no region is profitable, clearly signaling that deep discounts are hurting the business across the board.</p>
+<p>The sub-category breakdown adds another important layer. Categories like Tables, Supplies, and Binders show consistently negative profits at high discount ranges. Meanwhile, Copiers and Envelopes seem to hold up well — even at moderate discounts — suggesting some products are more resilient to pricing strategies than others.</p>
+<h2 id="hypothesis-3-inventory-optimization">Hypothesis 3: Inventory Optimization<a class="headerlink" href="#hypothesis-3-inventory-optimization" title="Permanent link">&para;</a></h2>
+<p><strong>“High-quantity orders and long shipping delays occur more frequently in specific sub-categories, suggesting a need for better inventory planning.”</strong></p>
+<h3 id="31-create-a-feature-shipping-delay">3.1) Create a Feature: Shipping Delay<a class="headerlink" href="#31-create-a-feature-shipping-delay" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Shipping Delay&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Ship Date&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Order Date&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">days</span>
+</code></pre></div>
+
+<h3 id="32-group-by-sub-category">3.2) Group by Sub-Category<a class="headerlink" href="#32-group-by-sub-category" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="n">inventory_check</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Sub-Category&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span>
+    <span class="s1">&#39;Quantity&#39;</span><span class="p">:</span> <span class="s1">&#39;mean&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Shipping Delay&#39;</span><span class="p">:</span> <span class="s1">&#39;mean&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Sales&#39;</span><span class="p">:</span> <span class="s1">&#39;sum&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Profit&#39;</span><span class="p">:</span> <span class="s1">&#39;sum&#39;</span>
+<span class="p">})</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;Shipping Delay&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</code></pre></div>
+
+<h3 id="33-shipping-delay-vs-quantity">3.3) Shipping Delay vs Quantity<a class="headerlink" href="#33-shipping-delay-vs-quantity" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">inventory_check</span><span class="p">,</span>
+    <span class="n">x</span><span class="o">=</span><span class="s1">&#39;Quantity&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Shipping Delay&#39;</span><span class="p">,</span>
+    <span class="n">size</span><span class="o">=</span><span class="s1">&#39;Sales&#39;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s1">&#39;Profit&#39;</span><span class="p">,</span>
+    <span class="n">palette</span><span class="o">=</span><span class="s1">&#39;coolwarm&#39;</span><span class="p">,</span> <span class="n">sizes</span><span class="o">=</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">800</span><span class="p">),</span> <span class="n">legend</span><span class="o">=</span><span class="kc">False</span>
+<span class="p">)</span>
+
+<span class="c1"># Add labels</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">inventory_check</span><span class="p">)):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span>
+        <span class="n">x</span><span class="o">=</span><span class="n">inventory_check</span><span class="p">[</span><span class="s1">&#39;Quantity&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="mf">0.01</span><span class="p">,</span>
+        <span class="n">y</span><span class="o">=</span><span class="n">inventory_check</span><span class="p">[</span><span class="s1">&#39;Shipping Delay&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
+        <span class="n">s</span><span class="o">=</span><span class="n">inventory_check</span><span class="p">[</span><span class="s1">&#39;Sub-Category&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
+        <span class="n">fontsize</span><span class="o">=</span><span class="mi">9</span>
+    <span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Shipping Delay vs Quantity (Bubble = Sales, Color = Profit)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Avg Quantity Ordered&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Avg Shipping Delay (days)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+
+<p><img alt="png" src="output_62_0.png" /></p>
+<p>Not all inventory delays are bad — some high-demand items like Phones and Chairs are profitable despite their shipping lag, suggesting they deserve better stock planning, not cuts. However, categories like Appliances and Tables show both operational delays and consistent losses across regions, making them strong candidates for pricing reviews, vendor renegotiation, or removal from key warehouses. Binders present a mixed case: they're profitable in some regions but severely unprofitable in Central, indicating a need for regional pricing or promotion adjustments.</p>
+<h2 id="hypothesis-4-time-to-profit-curve">Hypothesis 4: Time to Profit Curve<a class="headerlink" href="#hypothesis-4-time-to-profit-curve" title="Permanent link">&para;</a></h2>
+<p><strong>“The company’s profitability improves over time as order volume grows — but some months or seasons may bring losses or volatility.”</strong></p>
+<h3 id="41-extract-year-month-from-order-date">4.1)  Extract Year-Month from Order Date<a class="headerlink" href="#41-extract-year-month-from-order-date" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Order Month&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Order Date&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">to_period</span><span class="p">(</span><span class="s1">&#39;M&#39;</span><span class="p">)</span>
+</code></pre></div>
+
+<h3 id="42-group-by-month-sales-profit-orders">4.2) Group by Month: Sales, Profit, Orders<a class="headerlink" href="#42-group-by-month-sales-profit-orders" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="n">monthly</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Order Month&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span>
+    <span class="s1">&#39;Sales&#39;</span><span class="p">:</span> <span class="s1">&#39;sum&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Profit&#39;</span><span class="p">:</span> <span class="s1">&#39;sum&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Order ID&#39;</span><span class="p">:</span> <span class="s1">&#39;nunique&#39;</span>
+<span class="p">})</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">monthly</span><span class="p">[</span><span class="s1">&#39;Order Month&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">monthly</span><span class="p">[</span><span class="s1">&#39;Order Month&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">to_timestamp</span><span class="p">()</span>
+</code></pre></div>
+
+<h3 id="43-plot-time-series-of-sales-and-profit">4.3) Plot: Time Series of Sales and Profit<a class="headerlink" href="#43-plot-time-series-of-sales-and-profit" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">monthly</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;Order Month&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Profit&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Profit&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;crimson&#39;</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">monthly</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;Order Month&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Sales&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Sales&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;steelblue&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Monthly Sales vs Profit Over Time&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Amount ($)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Order Month&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+
+<p><img alt="png" src="output_70_0.png" /></p>
+<p>The business is growing, but not always profiting. To truly scale, it needs to tighten operations, optimize discounting, and focus on profitable SKUs — especially during high-volume months where volume may be masking value loss.</p>
+<div class="codehilite"><pre><span></span><code>
+</code></pre></div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.sections", "navigation.instant", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>
