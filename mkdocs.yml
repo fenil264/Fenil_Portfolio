@@ -1,36 +1,27 @@
-# === Site settings ===
-site_name: ""  # Hides the sidebar title (Fenil Patel Portfolio)
+site_name: "Fenil Patel Portfolio"
 site_url: https://fenil264.github.io/Fenil_Portfolio/
 
-# === Theme configuration using Material ===
 theme:
   name: material
 
-  # Color scheme (dark + indigo)
   palette:
     scheme: slate
     primary: indigo
     accent: indigo
 
-  # Navigation behavior and layout
   features:
-    - navigation.tabs         # Moves top-level nav (Home, DS, DA) to header
-    - navigation.sections     # Sections stay in sidebar
-    - navigation.instant      # Fast, reload-free navigation
-    - search.suggest          # Auto-suggest in search
-    - search.highlight        # Highlights search terms
+    - navigation.tabs
+    - navigation.sections
+    - navigation.instant
+    - search.suggest
+    - search.highlight
 
-  # GitHub icon
   icon:
     repo: fontawesome/brands/github
 
-  # Hides sidebar navigation on the homepage only
-  hide:
-    navigation: true
-
-# === Navigation structure ===
 nav:
-  - Home: index.md
+  - Home:
+      - Overview: index.md
   - Data Science:
       - Retail Profit Optimization: ds/retail-profit.md
   - Data Analytics:
@@ -38,11 +29,9 @@ nav:
   - Data Engineering:
       - Data Pipeline: de/data-pipeline.md
 
-# === GitHub repo badge in header ===
 repo_url: https://github.com/fenil264/Fenil_Portfolio
 repo_name: fenil264/Fenil_Portfolio
 
-# === Markdown enhancements ===
 markdown_extensions:
   - admonition
   - codehilite
@@ -51,10 +40,8 @@ markdown_extensions:
   - toc:
       permalink: true
 
-# === Plugins ===
 plugins:
   - search
 
-# === Custom stylesheet for layout/design improvements ===
 extra_css:
   - styles/extra.css
