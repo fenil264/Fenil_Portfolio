@@ -1,30 +1,25 @@
-# Site metadata
 site_name: Fenil Patel Portfolio
 site_url: https://fenil264.github.io/Fenil_Portfolio/
 
-# Theme configuration using Material for MkDocs
 theme:
   name: material
-
-  # Color scheme settings
   palette:
     scheme: slate
     primary: indigo
     accent: indigo
-
-  # GitHub icon in the header
   icon:
     repo: fontawesome/brands/github
-
-  # Theme features
   features:
-    # Removed navigation.tabs to keep everything in the left sidebar
-    - navigation.sections         # Sidebar grouped by sections
-    - navigation.instant          # Fast, reload-free page transitions
-    - search.suggest              # Auto-suggest while typing
-    - search.highlight            # Highlights matched search terms
+    - navigation.sections
+    - navigation.instant
+    - search.suggest
+    - search.highlight
 
-# Navigation structure (appears in the left sidebar)
+# Custom styling
+extra_css:
+  - styles/extra.css
+
+# Navigation sidebar
 nav:
   - Home: index.md
   - Data Science:
@@ -32,21 +27,20 @@ nav:
   - Data Analytics:
       - Sales Dashboard: da/sales-dashboard.md
   - Data Engineering:
-      - Data Pipeline: de/data-pipeline.md  # Remove this line if file doesn't exist
+      - Data Pipeline: de/data-pipeline.md
 
-# GitHub repo link in the top-right corner
+# GitHub repo link
 repo_url: https://github.com/fenil264/Fenil_Portfolio
 repo_name: fenil264/Fenil_Portfolio
 
-# Markdown extensions to enhance page formatting
+# Markdown formatting
 markdown_extensions:
-  - admonition               # For notes, tips, and warnings
-  - codehilite               # Code syntax highlighting
-  - footnotes                # Support for footnotes
-  - meta                     # Enable meta tags in markdown files
+  - admonition
+  - codehilite
+  - footnotes
+  - meta
   - toc:
-      permalink: true        # Anchor links beside each heading
+      permalink: true
 
-# MkDocs plugins
 plugins:
   - search

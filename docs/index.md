@@ -1,50 +1,34 @@
-# 👨‍💻 Fenil Patel – Data Portfolio
+# Welcome to My Portfolio
 
-Welcome to my curated portfolio — a place where curiosity meets code, and data drives decision-making.
+<div class="hero">
+  <h1>Hi, I'm Fenil Patel</h1>
+  <p>A passionate data enthusiast focused on building impactful solutions in Data Science, Analytics, and Engineering.</p>
+</div>
 
----
+## My Work
 
-## 🚀 About Me
+<div class="project-grid">
 
-I’m a data enthusiast with a sharp focus on business impact. My expertise spans across data science, analytics, and engineering — blending storytelling, statistical rigor, and scalable pipelines.
+<div class="project-card">
+  <h3>Retail Profit Optimization</h3>
+  <p>Data Science project to optimize revenue from retail chains using predictive modeling.</p>
+  <a href="ds/retail-profit/" class="button">View Project</a>
+</div>
 
-- 🎓 Master’s in Big Data Analytics  
-- 💡 Skilled in real-world problem-solving through data  
-- ⚙️ Python, SQL, Pandas, Power BI, Scikit-learn, and more  
+<div class="project-card">
+  <h3>Sales Dashboard</h3>
+  <p>Interactive dashboard showing KPIs, trends, and sales insights for business stakeholders.</p>
+  <a href="da/sales-dashboard/" class="button">View Dashboard</a>
+</div>
 
----
+<div class="project-card">
+  <h3>Data Pipeline</h3>
+  <p>End-to-end data pipeline for automated ETL and storage using Python and SQL.</p>
+  <a href="de/data-pipeline/" class="button">View Pipeline</a>
+</div>
 
-## 🔍 Project Highlights
+</div>
 
-Each project goes beyond just code — it addresses business pain points, applies thoughtful analytics, and delivers actionable insights.
-
-### 🧬 Data Science
-- [Retail Profit Optimization](ds/retail-profit.md):  
-  Detecting discount abuse, identifying profit leakage, and engineering business hypotheses.
-
-### 📊 Data Analytics
-- [Sales Dashboard](da/sales-dashboard.md):  
-  Visualizing KPIs, uncovering trends, and delivering interactive dashboards for stakeholders.
-
-### 🛠️ Data Engineering
-- [Data Pipeline](de/data-pipeline.md):  
-  End-to-end ETL pipeline architecture with scalable ingestion and data integrity validation.
-
----
-
-## 🧭 Why This Portfolio?
-
-This isn’t just a code repository — it’s a showcase of end-to-end thinking:  
-From data ingestion, hypothesis formulation, engineering, and modeling to final business insight.
-
----
-
-## 📫 Let’s Connect
-
-- GitHub: [fenil264](https://github.com/fenil264)
-- Email: fenilp00@gmail.com
-
-
----
-
-
+<footer class="md-footer">
+  Built  using MkDocs Material — Fenil Patel © 2025
+</footer>

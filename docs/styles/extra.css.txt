@@ -1,0 +1,81 @@
+/* ====== SIDEBAR ====== */
+.md-sidebar--primary {
+  position: sticky;
+  top: 0;
+  max-height: 100vh;
+  overflow-y: auto;
+}
+
+.md-nav__link--active {
+  border-left: 3px solid #3f51b5;
+  font-weight: bold;
+}
+
+/* ====== HEADER ====== */
+.md-header {
+  padding: 0.3em 1em;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* ====== FOOTER ====== */
+footer.md-footer {
+  text-align: center;
+  font-size: 0.9em;
+  padding: 1em;
+  color: #aaa;
+}
+
+/* ====== HOMEPAGE HERO SECTION ====== */
+.hero {
+  text-align: center;
+  padding: 4em 2em;
+  background: #202124;
+  color: #fff;
+  border-radius: 8px;
+  margin-bottom: 2em;
+}
+
+.hero h1 {
+  font-size: 2.5em;
+  margin-bottom: 0.3em;
+}
+
+.hero p {
+  font-size: 1.2em;
+}
+
+/* ====== PROJECT CARDS ON HOMEPAGE ====== */
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5em;
+}
+
+.project-card {
+  padding: 1.2em;
+  border: 1px solid #444;
+  border-radius: 12px;
+  background: #2a2b2e;
+  transition: transform 0.2s ease;
+  text-align: center;
+}
+
+.project-card:hover {
+  transform: translateY(-4px);
+  border-color: #3f51b5;
+}
+
+/* ====== BUTTON STYLING ====== */
+.button {
+  display: inline-block;
+  padding: 0.6em 1.2em;
+  background-color: #3f51b5;
+  color: white;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+}
+
+.button:hover {
+  background-color: #5c6bc0;
+}
