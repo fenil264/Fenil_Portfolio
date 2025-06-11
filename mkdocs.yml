@@ -1,32 +1,33 @@
-# === Basic Site Info ===
-site_name: ""  # Hides "Fenil Patel Portfolio" from sidebar title
+# ============================
+#    Fenil Patel Portfolio
+# ============================
+
+# Site Information
+site_name: Fenil Patel Portfolio
 site_url: https://fenil264.github.io/Fenil_Portfolio/
 
-# === Theme Configuration ===
+# Theme: Material for MkDocs
 theme:
   name: material
 
-  # Appearance
+  # Color palette
   palette:
-    scheme: slate
-    primary: indigo
+    scheme: slate         # Dark mode look
+    primary: indigo       # Brand color
     accent: indigo
 
+  # GitHub icon in top-right
   icon:
     repo: fontawesome/brands/github
 
-  # Features
+  # UI Features
   features:
-    - navigation.tabs          # Top nav bar with tabs
-    - navigation.instant       # Fast page transitions
-    - search.suggest           # Autocomplete search
-    - search.highlight         # Highlight results
+    - navigation.sections     # Sidebar section groups
+    - navigation.instant      # Fast, reload-free navigation
+    - search.suggest          # Typeahead search
+    - search.highlight        # Highlight results
 
-  # Hide the sidebar completely
-  hide:
-    navigation: true
-
-# === Navigation (Top Tabs Only) ===
+# Navigation shown in sidebar only (no top tabs)
 nav:
   - Home: index.md
   - Data Science:
@@ -36,23 +37,23 @@ nav:
   - Data Engineering:
       - Data Pipeline: de/data-pipeline.md
 
-# === Repository Link ===
+# GitHub Repository Link
 repo_url: https://github.com/fenil264/Fenil_Portfolio
 repo_name: fenil264/Fenil_Portfolio
 
-# === Markdown Features ===
+# Markdown Enhancements
 markdown_extensions:
-  - admonition
-  - codehilite
-  - footnotes
-  - meta
+  - admonition          # Tip/note blocks
+  - codehilite          # Syntax highlighting
+  - footnotes           # Markdown footnotes
+  - meta                # Metadata in markdown
   - toc:
-      permalink: true
+      permalink: true   # Anchor links on headings
 
-# === Custom CSS for Styling ===
-extra_css:
-  - styles/extra.css
-
-# === Plugins ===
+# Plugins for extended features
 plugins:
   - search
+
+# Custom CSS (for design and layout)
+extra_css:
+  - styles/extra.css
