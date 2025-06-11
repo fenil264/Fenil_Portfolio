@@ -1,25 +1,32 @@
-site_name: Fenil Patel Portfolio
+# === Site configuration ===
+site_name: ""  # Intentionally blank to remove sidebar title
 site_url: https://fenil264.github.io/Fenil_Portfolio/
 
+# === Theme settings using Material for MkDocs ===
 theme:
   name: material
+
+  # Color palette for professional dark theme
   palette:
     scheme: slate
     primary: indigo
     accent: indigo
-  icon:
-    repo: fontawesome/brands/github
+
+  # Optional: Add a logo (store it in docs/assets/logo.png)
+  # logo: assets/logo.png
+
+  # Header and navigation behavior
   features:
-    - navigation.sections
-    - navigation.instant
-    - search.suggest
-    - search.highlight
+    - navigation.tabs         # Enables top-level tabs (puts Home in header)
+    - navigation.sections     # Sidebar grouped by sections
+    - navigation.instant      # Instant load without page refresh
+    - search.suggest          # Smart search suggestions
+    - search.highlight        # Highlights keywords in results
 
-# Custom styling
-extra_css:
-  - styles/extra.css
+  icon:
+    repo: fontawesome/brands/github  # GitHub icon in header
 
-# Navigation sidebar
+# === Navigation structure (top-level go to header tabs) ===
 nav:
   - Home: index.md
   - Data Science:
@@ -29,18 +36,23 @@ nav:
   - Data Engineering:
       - Data Pipeline: de/data-pipeline.md
 
-# GitHub repo link
+# === GitHub repo link ===
 repo_url: https://github.com/fenil264/Fenil_Portfolio
 repo_name: fenil264/Fenil_Portfolio
 
-# Markdown formatting
+# === Markdown enhancements ===
 markdown_extensions:
-  - admonition
-  - codehilite
-  - footnotes
-  - meta
+  - admonition               # Blocks for tips, notes, warnings
+  - codehilite               # Syntax highlighting
+  - footnotes                # Support for footnotes
+  - meta                     # Allows metadata in markdown files
   - toc:
-      permalink: true
+      permalink: true        # Adds link icons next to headers
 
+# === Plugins ===
 plugins:
   - search
+
+# === Custom styling ===
+extra_css:
+  - styles/extra.css
