@@ -1,0 +1,101 @@
+/* ====== SIDEBAR ====== */
+.md-sidebar--primary {
+  position: sticky;
+  top: 0;
+  max-height: 100vh;
+  overflow-y: auto;
+}
+.md-nav__link--active {
+  border-left: 4px solid #3f51b5;
+  background-color: #2c2d30;
+  font-weight: 600;
+}
+
+/* ====== HEADER ====== */
+.md-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  padding: 0.3em 1em;
+  background-color: #1f1f1f;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* ====== FOOTER ====== */
+footer.md-footer {
+  text-align: center;
+  font-size: 0.9em;
+  padding: 1.5em 1em;
+  color: #aaa;
+  border-top: 1px solid #333;
+  margin-top: 2em;
+}
+
+/* ====== HOMEPAGE HERO SECTION ====== */
+.hero {
+  text-align: center;
+  padding: 4em 2em;
+  background: #2a2a2a;
+  color: #fff;
+  border-radius: 8px;
+  margin-bottom: 3em;
+}
+.hero h1 {
+  font-size: 2.8em;
+  margin-bottom: 0.3em;
+}
+.hero p {
+  font-size: 1.2em;
+  color: #ccc;
+}
+
+/* ====== PROJECT CARDS GRID ====== */
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.8em;
+  padding-bottom: 2em;
+}
+
+.project-card {
+  padding: 1.5em;
+  border: 1px solid #444;
+  border-radius: 12px;
+  background: #2f3033;
+  transition: transform 0.25s ease;
+  text-align: center;
+  color: #eee;
+}
+.project-card:hover {
+  transform: translateY(-6px);
+  border-color: #3f51b5;
+}
+.project-card h3 {
+  margin-top: 0.2em;
+}
+.project-card p {
+  font-size: 0.95em;
+  color: #bbb;
+  margin-bottom: 1em;
+}
+
+/* ====== BUTTON STYLING ====== */
+.button {
+  display: inline-block;
+  padding: 0.6em 1.4em;
+  background-color: #3f51b5;
+  color: white;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+}
+.button:hover {
+  background-color: #5c6bc0;
+}
+
+/* ====== RESPONSIVE MEDIA ====== */
+img, pre, code, iframe {
+  max-width: 100%;
+  overflow: auto;
+}

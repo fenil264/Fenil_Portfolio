@@ -27,15 +27,16 @@ theme:
     - search.suggest          # Typeahead search
     - search.highlight        # Highlight results
 
-# Navigation shown in sidebar only (no top tabs)
 nav:
   - Home: index.md
   - Data Science:
       - Retail Profit Optimization: ds/retail-profit.md
   - Data Analytics:
       - Sales Dashboard: da/sales-dashboard.md
+      - EDA and Data Cleaning: da/eda-cleaning.md
   - Data Engineering:
       - Data Pipeline: de/data-pipeline.md
+
 
 # GitHub Repository Link
 repo_url: https://github.com/fenil264/Fenil_Portfolio
