@@ -1,32 +1,34 @@
-# === Site configuration ===
-site_name: ""  # Intentionally blank to remove sidebar title
+# === Site settings ===
+site_name: ""  # Hides the sidebar title (Fenil Patel Portfolio)
 site_url: https://fenil264.github.io/Fenil_Portfolio/
 
-# === Theme settings using Material for MkDocs ===
+# === Theme configuration using Material ===
 theme:
   name: material
 
-  # Color palette for professional dark theme
+  # Color scheme (dark + indigo)
   palette:
     scheme: slate
     primary: indigo
     accent: indigo
 
-  # Optional: Add a logo (store it in docs/assets/logo.png)
-  # logo: assets/logo.png
-
-  # Header and navigation behavior
+  # Navigation behavior and layout
   features:
-    - navigation.tabs         # Enables top-level tabs (puts Home in header)
-    - navigation.sections     # Sidebar grouped by sections
-    - navigation.instant      # Instant load without page refresh
-    - search.suggest          # Smart search suggestions
-    - search.highlight        # Highlights keywords in results
+    - navigation.tabs         # Moves top-level nav (Home, DS, DA) to header
+    - navigation.sections     # Sections stay in sidebar
+    - navigation.instant      # Fast, reload-free navigation
+    - search.suggest          # Auto-suggest in search
+    - search.highlight        # Highlights search terms
 
+  # GitHub icon
   icon:
-    repo: fontawesome/brands/github  # GitHub icon in header
+    repo: fontawesome/brands/github
 
-# === Navigation structure (top-level go to header tabs) ===
+  # Hides sidebar navigation on the homepage only
+  hide:
+    navigation: true
+
+# === Navigation structure ===
 nav:
   - Home: index.md
   - Data Science:
@@ -36,23 +38,23 @@ nav:
   - Data Engineering:
       - Data Pipeline: de/data-pipeline.md
 
-# === GitHub repo link ===
+# === GitHub repo badge in header ===
 repo_url: https://github.com/fenil264/Fenil_Portfolio
 repo_name: fenil264/Fenil_Portfolio
 
 # === Markdown enhancements ===
 markdown_extensions:
-  - admonition               # Blocks for tips, notes, warnings
-  - codehilite               # Syntax highlighting
-  - footnotes                # Support for footnotes
-  - meta                     # Allows metadata in markdown files
+  - admonition
+  - codehilite
+  - footnotes
+  - meta
   - toc:
-      permalink: true        # Adds link icons next to headers
+      permalink: true
 
 # === Plugins ===
 plugins:
   - search
 
-# === Custom styling ===
+# === Custom stylesheet for layout/design improvements ===
 extra_css:
   - styles/extra.css
