@@ -1,4 +1,7 @@
-# 👨‍💻 Fenil Patel – Data Portfolio
+> **Note:** This portfolio is currently under construction. Content updates are ongoing.
+
+
+## Hello,
 
 Welcome to my curated portfolio — a place where curiosity meets code, and data drives decision-making.
 

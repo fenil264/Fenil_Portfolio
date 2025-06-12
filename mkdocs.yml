@@ -3,7 +3,6 @@
 # ============================
 
 # Site Information
-site_name: Fenil Patel Portfolio
 site_url: https://fenil264.github.io/Fenil_Portfolio/
 
 # Theme: Material for MkDocs
@@ -33,7 +32,7 @@ nav:
       - Retail Profit Optimization: ds/retail-profit.md
   - Data Analytics:
       - Sales Dashboard: da/sales-dashboard.md
-      - EDA and Data Cleaning: da/eda-cleaning.md
+      - Superstore Retail Analysis: da/eda-cleaning.md
   - Data Engineering:
       - Data Pipeline: de/data-pipeline.md
 
