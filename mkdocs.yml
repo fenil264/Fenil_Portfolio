@@ -3,6 +3,7 @@
 # ============================
 
 # Site Information
+site_name: Portfolio
 site_url: https://fenil264.github.io/Fenil_Portfolio/
 
 # Theme: Material for MkDocs
