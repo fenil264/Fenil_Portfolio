@@ -32,6 +32,7 @@ nav:
   - Data Science:
       - Genomic and Climate Adaptation in High-Altitude Bovids: ds/genomic_climate_adaptation
       - Career Recommendation System (IBM Project): ds/ibm-career-recommendation.md
+      - House Price Prediction: ds/house-price-prediction
   - Data Analytics:
       - Sales Dashboard: da/sales-dashboard.md
       - Superstore Retail Analysis: da/eda-cleaning.md
