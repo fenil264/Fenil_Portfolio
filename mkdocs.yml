@@ -30,7 +30,7 @@ theme:
 nav:
   - Home: index.md
   - Data Science:
-      - Retail Profit Optimization: ds/retail-profit.md
+      - Genomic and Climate Adaptation in High-Altitude Bovids: ds/genomic_climate_adaptation
   - Data Analytics:
       - Sales Dashboard: da/sales-dashboard.md
       - Superstore Retail Analysis: da/eda-cleaning.md
